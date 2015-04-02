@@ -21,11 +21,22 @@ if($page)
 {	
 	$page = preg_replace('/\.\.\//', '', $page);
 	
-	$requestedFile = $page . 'index.html';
-	if(file_exists($requestedFile))
+	$params = explode('/', $page);
+	$lastUrl = end($params);
+	array_pop($params);
+	$page = implode('/', $params);	
+	
+	$requestedFile = $page . '/' . $lastUrl . '.html';
+
+	if(file_exists($requestedFile = $page . '/' . $lastUrl . '.html'))
 	{
 		$file = $requestedFile;		
 	}
+	else if(file_exists($requestedFile = $page . '/index.html'))
+	{
+		$file = $requestedFile;
+	}
+	
 }
 
 $parseDown = new ParseDown();
