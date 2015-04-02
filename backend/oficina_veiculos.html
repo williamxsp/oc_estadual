@@ -1,0 +1,67 @@
+<!--
+@__title__ Back-End
+@__subtitle__ Oficina Veículos
+@__backgroundImage__ code.png
+-->
+#__title__
+
+## Introdução
+Uma empresa de venda de automóveis pretende implementar um sistema para gerir a informação relativa às operações de oficina efetuadas nos veículos dos seus clientes.
+
+Você deve desenvolver um sistema em PHP e MySQL para gerenciar os veículos, clientes e seus respectivos alugueis.
+
+##Instrução para o competidor
+O cliente forneceu a logo da empresa para que o sistema desenvolvido utilize a mesma linguagem visual. Você pode baixar as mídias [clicando aqui](oficina_veiculos_midias.zip).
+
+Você possui 3 horas para realização da tarefa
+
+##Requisitos do Projeto
+
+Deve ser possível cadastrar clientes com os seguintes campos
+- Nome
+- Endereço
+- CPF
+- Telefone
+- Número do Cartão
+
+*Todos os campos são obrigatórios*
+
+Cadastro de modelos de carros com as seguintes informações
+- Marca
+	- Campo select com dados vindos do banco de dados
+- Descrição do modelo
+- Valor da diária
+
+Cadastro de Veículos com os seguintes campos
+
+- Chassi
+	- Obrigatório
+	- Mínimo de 11 caracteres
+- Placa
+- Marca
+	- Campo select com dados vindos do banco de dados
+- Modelo
+	- Vir do Banco de dados de acordo com a marca escolhida
+- Ano
+	- Obrigatórios
+	- Somente Números
+- Cor
+
+Registro de Aluguel de Veículo com as seguintes informações
+- Carro que está sendo alugado
+- Cliente que está alugando o carro
+- Data de locação
+- Data de devolução
+
+Após o cadastro dessas informações, deve ser exibido o valor que o cliente deverá pagar. 
+
+Não deve ser possível alugar dois carros para o mesmo cliente em um mesmo perído de tempo.
+
+Devolução do carro
+Deve ser possível visualizar todos os clientes que estão com um carro alugado. Para cada cliente deve ser possível indicar que o carro foi devolvido. Nesse momento, deve ser recalculado o valor do aluguel do cliente caso ele tenha devolvido antes ou depois do perído indicado na locação.
+
+
+
+<!-- ##Avaliação
+Tipo | Descrição | Pontuação
+---- | --- | --- -->
