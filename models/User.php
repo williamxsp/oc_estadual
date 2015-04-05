@@ -33,7 +33,7 @@ class User extends \yii\db\ActiveRecord implements  IdentityInterface
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['username', 'password'], 'required'],
             [['id'], 'integer'],
             [['username', 'password'], 'string', 'max' => 45],
             [['username'], 'unique']
@@ -184,6 +184,15 @@ class User extends \yii\db\ActiveRecord implements  IdentityInterface
     {
         $this->password_reset_token = null;
     }
-    /** EXTENSION MOVIE **/
 
+
+    public function beforeSave($insert)
+    {
+        if($this->isNewRecord)
+        {
+            $this->password = sha1($this->password);
+        }
+
+        return parent::beforeSave($insert);
+    }
 }

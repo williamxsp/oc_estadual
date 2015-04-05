@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
  */
 class TaskController extends Controller
 {
+
     public function behaviors()
     {
         return [
@@ -23,19 +24,24 @@ class TaskController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                 ],
+
             ],
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ]
         ];
     }
-
 
     /**
      * Lists all Task models.
@@ -55,14 +61,13 @@ class TaskController extends Controller
     /**
      * Displays a single Task model.
      * @param integer $id
-     * @param integer $category_id
-     * @param integer $user_id
      * @return mixed
      */
-    public function actionView($id, $category_id, $user_id)
+    public function actionView($id)
     {
+        $this->layout = 'task.php';
         return $this->render('view', [
-            'model' => $this->findModel($id, $category_id, $user_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -76,7 +81,7 @@ class TaskController extends Controller
         $model = new Task();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'category_id' => $model->category_id, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -88,16 +93,14 @@ class TaskController extends Controller
      * Updates an existing Task model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
-     * @param integer $category_id
-     * @param integer $user_id
      * @return mixed
      */
-    public function actionUpdate($id, $category_id, $user_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $category_id, $user_id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'category_id' => $model->category_id, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -109,13 +112,11 @@ class TaskController extends Controller
      * Deletes an existing Task model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @param integer $category_id
-     * @param integer $user_id
      * @return mixed
      */
-    public function actionDelete($id, $category_id, $user_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $category_id, $user_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -124,14 +125,12 @@ class TaskController extends Controller
      * Finds the Task model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @param integer $category_id
-     * @param integer $user_id
      * @return Task the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $category_id, $user_id)
+    protected function findModel($id)
     {
-        if (($model = Task::findOne(['id' => $id, 'category_id' => $category_id, 'user_id' => $user_id])) !== null) {
+        if (($model = Task::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

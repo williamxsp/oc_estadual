@@ -14,10 +14,7 @@ use app\models\Category;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(
-            ArrayHelper::map(Category::find()->all(), 'id', 'description'),           // Flat array ('id'=>'label')
-            ['prompt'=>'Selecione a Categoria']    // options
-        ); ?>
+    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'description')) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 45]) ?>
 
@@ -28,7 +25,7 @@ use app\models\Category;
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

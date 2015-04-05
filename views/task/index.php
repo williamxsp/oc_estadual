@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tasks';
+$this->title = 'Tarefas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="task-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Task', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nova Tarefa', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

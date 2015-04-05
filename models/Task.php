@@ -34,7 +34,7 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'user_id'], 'required'],
+            [['category_id'], 'required'],
             [['category_id', 'user_id'], 'integer'],
             [['description'], 'string'],
             [['title', 'subtitle'], 'string', 'max' => 45],
@@ -49,13 +49,19 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'user_id' => 'User ID',
-            'title' => 'Title',
-            'subtitle' => 'Subtitle',
-            'image' => 'Image',
-            'description' => 'Description',
+            'category_id' => 'Categoria',
+            'user_id' => 'Usuário',
+            'title' => 'Título',
+            'subtitle' => 'Subtítulo',
+            'image' => 'Imagem',
+            'description' => 'Conteúdo',
         ];
+    }
+
+    public function beforeValidate()
+    {
+       $this->user_id = 1;
+        return true;
     }
 
     /**
@@ -72,13 +78,5 @@ class Task extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    public function beforeSave()
-    {
-        //$this->user_id = Yii::$app->user->identity->id;
-        var_dump($this->user_id);
-        die();
-        return false;
     }
 }

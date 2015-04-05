@@ -31,8 +31,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'required'],
             [['category_id'], 'integer'],
+            [['description'], 'required'],
             [['description'], 'string', 'max' => 45]
         ];
     }
@@ -45,7 +45,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Categoria Pai',
-            'description' => 'Description',
+            'description' => 'Descrição',
         ];
     }
 

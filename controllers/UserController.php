@@ -29,10 +29,15 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ]
         ];
     }
 
@@ -108,6 +113,7 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
+        
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
